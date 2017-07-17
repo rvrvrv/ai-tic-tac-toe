@@ -1,0 +1,125 @@
+html {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+div {
+	white-space: nowrap;
+}
+
+body {
+	background: #003d30 -webkit-gradient(linear, left top, left bottom, from(#003d30), to(#0e0e0e)) fixed;
+	background: #003d30 linear-gradient(to bottom, #003d30 0%, #0e0e0e 100%) fixed;
+	color: white;
+	text-align: center;
+	font-family: 'Rancho', sans-serif;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	overflow: hidden;
+	outline: none !important;
+	-webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+.title {
+	margin: -20px 0 -5px 0;
+	width: 100%;
+}
+
+h1 {
+	text-shadow: 0px 7px 8px rgba(150, 248, 255, 0.2);
+	font-size: 5em;
+}
+
+h2 {
+	font-size: 1.5em;
+	padding-bottom: .05em;
+}
+
+.smTxt {
+	font-size: .7em;
+	margin-left: 5px;
+}
+
+.board {
+	background: black;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 0px 10px rgba(150, 248, 255, 0.2);
+	box-shadow: 0px 0px 10px rgba(150, 248, 255, 0.2);
+	margin: 10px auto;
+	font-size: 5em;
+	padding: 15px 25px;
+	width: 60%;
+	min-width: 300px;
+	max-width: 500px;
+	display: none;
+}
+
+.rowTop,
+.rowMid {
+	border-bottom: 5px solid white;
+}
+
+.colLeft,
+.colMid {
+	border-right: 5px solid white;
+}
+
+.info,
+.startInfo {
+	font-family: 'Just Another Hand', sans-serif;
+	font-size: 3.8em;
+	letter-spacing: 3px;
+}
+
+.info {
+	position: relative;
+	margin-top: -10px;
+	display: none;
+}
+
+.startInfo {
+	background: black;
+	border-radius: 20px;
+	border: 1px groove white;
+	-webkit-box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
+	box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
+	width: 60%;
+	min-width: 300px;
+	margin: 10% auto;
+}
+
+#player,
+#choiceX,
+#choiceO {
+	font-size: 1.7em;
+	margin-right: 5px;
+}
+
+#choiceX:hover,
+#choiceO:hover {
+	color: chartreuse;
+	cursor: pointer;
+}
+
+#resetBtn,
+#newBtn {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 75px;
+	font-family: 'Roboto Condensed', Verdana;
+	font-size: 1.5em;
+	line-height: 1.2em;
+	display: none;
+	white-space: normal;
+}
