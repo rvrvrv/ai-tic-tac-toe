@@ -26,13 +26,6 @@ body {
 	user-select: none;
 	overflow: hidden;
 	outline: none !important;
-	-webkit-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-}
-
-.title {
-	margin: -20px 0 -5px 0;
-	width: 100%;
 }
 
 h1 {
@@ -45,9 +38,15 @@ h2 {
 	padding-bottom: .05em;
 }
 
-.smTxt {
+small {
+	color: white !important;
 	font-size: .7em;
 	margin-left: 5px;
+}
+
+.title {
+	margin: -20px 0 -5px 0;
+	width: 100%;
 }
 
 .board {
@@ -62,6 +61,11 @@ h2 {
 	min-width: 300px;
 	max-width: 500px;
 	display: none;
+}
+
+.col-xs-4 {
+	-webkit-transition: all 1s;
+	transition: all 1s;
 }
 
 .rowTop,
@@ -103,6 +107,8 @@ h2 {
 #choiceO {
 	font-size: 1.7em;
 	margin-right: 5px;
+	-webkit-transition: color .5s;
+	transition: color .5s;
 }
 
 #choiceX:hover,
