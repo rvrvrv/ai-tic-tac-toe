@@ -26,7 +26,7 @@ function newGame() {
 		gameOver = false;
 		round = 0;
 		$('.info').hide();
-		$('.startInfo').show();
+		$('.start-info').show();
 		for (var i = 0; i < 9; i++) {
 			$('#' + i).html('&nbsp;');
 			$('#' + i).css('color', 'white');
@@ -38,7 +38,7 @@ function newGame() {
 
 //Check for victory
 function winCheck(player, who) {
-	var playerArr = [];
+	let playerArr = [];
 	//If player has 3 symbols on board,
 	//actually check for win
 	if (round > 2) {
@@ -216,7 +216,7 @@ function hideButton(btn) {
 //X and O buttons at start of game
 $('#choiceX').click(() => {
 	$('#player').text('X');
-	$('.startInfo').fadeOut(100, () => {
+	$('.start-info').fadeOut(100, () => {
 		$('.board').show();
 		$('.info').show();
 		showButton('reset');
@@ -225,7 +225,7 @@ $('#choiceX').click(() => {
 
 $('#choiceO').click(function() {
 	$('#player').text('O');
-	$('.startInfo').fadeOut(100, () => {
+	$('.start-info').fadeOut(100, () => {
 		$('.board').show();
 		$('.info').show();
 		showButton('reset');

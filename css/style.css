@@ -45,8 +45,30 @@ small {
 }
 
 .title {
-	margin: -20px 0 -5px 0;
-	width: 100%;
+	margin: -20px 0 30px 0;
+}
+
+.info,
+.start-info {
+	font-family: 'Just Another Hand', sans-serif;
+	font-size: 3.8em;
+	letter-spacing: 3px;
+}
+
+.info {
+	position: relative;
+	margin-top: -10px;
+	display: none;
+}
+
+.start-info {
+	background: black;
+	border-radius: 20px;
+	border: 1px groove white;
+	-webkit-box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
+	box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .board {
@@ -68,38 +90,14 @@ small {
 	transition: all 1s;
 }
 
-.rowTop,
-.rowMid {
+.row-top,
+.row-mid {
 	border-bottom: 5px solid white;
 }
 
-.colLeft,
-.colMid {
+.col-left,
+.col-mid {
 	border-right: 5px solid white;
-}
-
-.info,
-.startInfo {
-	font-family: 'Just Another Hand', sans-serif;
-	font-size: 3.8em;
-	letter-spacing: 3px;
-}
-
-.info {
-	position: relative;
-	margin-top: -10px;
-	display: none;
-}
-
-.startInfo {
-	background: black;
-	border-radius: 20px;
-	border: 1px groove white;
-	-webkit-box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
-	box-shadow: 0px 0px 30px rgba(0, 255, 255, 0.2);
-	width: 60%;
-	min-width: 300px;
-	margin: 10% auto;
 }
 
 #player,
@@ -128,4 +126,14 @@ small {
 	line-height: 1.2em;
 	display: none;
 	white-space: normal;
+}
+
+/* Adjustments for landscape mode on small screens */
+@media only screen and (orientation: landscape) and (max-height: 768px) {
+	.title {
+		display: none;
+	}
+	.start-info {
+		margin-top: 8%;
+	}
 }
