@@ -24,6 +24,8 @@ $(document).ready(newGame());
 function newGame() {
 	$('.board').fadeOut(100, () => {
 		gameOver = false;
+		boardState = [];
+		emptySpaces = [];
 		round = 0;
 		$('.info').hide();
 		$('.start-info').show();
@@ -72,7 +74,7 @@ function winResults(player, winArr) {
 	$('#player').text(player);
 	$('#status').text(' won the game!');
 
-	winArr.forEach(function (z) {
+	winArr.forEach(z => {
 		$('#' + z).css('color', 'chartreuse');
 	});
 
@@ -108,9 +110,8 @@ function aiTurn(player) {
 	if (round === 1) {
 		//Take middle position
 		if ($('#4').html() === '&nbsp;') return aiMove('#4', player);
-		else
-			//Otherwise, take random corner
-			return aiMove('#' + corners[Math.floor(Math.random() * 4)], player);
+		//Otherwise, take random corner
+		else return aiMove('#' + corners[Math.floor(Math.random() * 4)], player);
 	}
 	//During 2nd rounder or later, implement actual logic
 	getBoardState();
@@ -127,13 +128,13 @@ function aiTurn(player) {
 	});
 
 	//If there's a winning move, take it
-	let move = checkPotentialWin(selfArr, player);
-	if (!isNaN(move)) return aiMove('#' + move, player);
-	else if (round % 2 !== 0 && isNaN(move)) {
+	let move = checkPotentialWin(selfArr);
+	if (move >= 0) return aiMove('#' + move, player);
+	else if (round % 2 !== 0) {
 		//If human (opponent) has a winning move, and AI hasn't moved yet,
 		//block human's move
-		let move = checkPotentialWin(oppArr, player);
-		if (!isNaN(move)) return aiMove('#' + move, player);
+		let move = checkPotentialWin(oppArr);
+		if (move >= 0) return aiMove('#' + move, player);
 	}
 	//Otherwise, move somewhere else
 	if (round % 2 !== 0) {
@@ -155,7 +156,7 @@ function aiMove(spot, player) {
 }
 
 //Check for one move away from a win
-function checkPotentialWin(arr, player) {
+function checkPotentialWin(arr) {
 	let move = false;
 	for (let z = 0; z < 8; z++) {
 		if (
@@ -163,26 +164,21 @@ function checkPotentialWin(arr, player) {
 			arr.includes(winningLines[z][1]) &&
 			$('#' + winningLines[z][2]).html() === '&nbsp;'
 		) {
-			move = winningLines[z][2];
-			break;
+			return winningLines[z][2];
 		} else if (
 			arr.includes(winningLines[z][0]) &&
 			arr.includes(winningLines[z][2]) &&
 			$('#' + winningLines[z][1]).html() === '&nbsp;'
 		) {
-			move = winningLines[z][1];
-			break;
+			return winningLines[z][1];
 		} else if (
 			arr.includes(winningLines[z][1]) &&
 			arr.includes(winningLines[z][2]) &&
 			$('#' + winningLines[z][0]).html() === '&nbsp;'
 		) {
-			move = winningLines[z][0];
-			break;
+			return winningLines[z][0];
 		}
 	}
-	//If a potential move was found, return that move
-	if (move) return move;
 }
 
 //Map state of the board to an array
@@ -240,19 +236,19 @@ $('#newBtn').click(() => {
 });
 
 //When hovering over empty board space, change cursor to pointer
-$('.col-xs-4').mouseenter(function () {
+$('.col-xs-4').mouseenter(function() {
 	if (!gameOver && $(this).html() === '&nbsp;') {
 		$(this).css('cursor', 'pointer');
 	}
 });
 
 //When leaving board space, restore cursor to default
-$('.col-xs-4').mouseleave(function () {
+$('.col-xs-4').mouseleave(function() {
 	$(this).css('cursor', 'default');
 });
 
 //User clicks on board
-$('.col-xs-4').click(function () {
+$('.col-xs-4').click(function() {
 	let human = $('#player').text();
 	if (!gameOver) {
 		//Ensure space is blank
