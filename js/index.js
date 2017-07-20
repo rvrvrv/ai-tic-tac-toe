@@ -15,8 +15,7 @@ const corners = [0, 2, 6, 8];
 let boardState = [];
 let emptySpaces = [];
 let round = 0;
-let opponent = '';
-let gameOver = true;
+let opponent, gameOver, paused;
 
 $(document).ready(newGame());
 
@@ -24,13 +23,14 @@ $(document).ready(newGame());
 function newGame() {
 	$('.board').fadeOut(100, () => {
 		gameOver = false;
+		paused = false;
 		boardState = [];
 		emptySpaces = [];
 		round = 0;
 		$('.info').hide();
 		$('.start-info').show();
 		$('#player').empty();
-		$('#status').text('\'s turn');
+		$('#status').html('\'s turn');
 		$('.col-xs-4').html('&nbsp;');
 		$('.col-xs-4').css('color', 'white');
 	});
@@ -71,8 +71,8 @@ function winCheck(player, who) {
 
 //Return winning results
 function winResults(player, winArr) {
-	$('#player').text(player);
-	$('#status').text(' won the game!');
+	$('#player').html(player);
+	$('#status').html(' won the game!');
 
 	winArr.forEach(z => {
 		$('#' + z).css('color', 'chartreuse');
@@ -87,8 +87,8 @@ function tieGame() {
 	gameOver = true;
 	hideButton('reset');
 	showButton('new');
-	$('#player').text('');
-	$('#status').text('It\'s a tie!');
+	$('#player').html('');
+	$('#status').html('It\'s a tie!');
 	$('.col-xs-4').css('color', 'sienna');
 }
 
@@ -98,11 +98,11 @@ function switchTurns(player, who) {
 	if (who === 'Human') {
 		aiTurn(`${player === 'X' ? 'O' : 'X'}`);
 	}
+	else paused = false;
 }
 
 //AI Logic
 function aiTurn(player) {
-	console.log('AI Turn, Round: ' + round);
 	//Store player/opponent
 	opponent = player === 'O' ? 'X' : 'O';
 
@@ -151,8 +151,12 @@ function aiTurn(player) {
 
 //Perform AI's move
 function aiMove(spot, player) {
-	$(spot).text(player);
-	winCheck(player, 'AI');
+		$(spot).css('color', 'black');
+		setTimeout(() => {
+			$(spot).html(player);
+			$(spot).css('color', 'white');
+			winCheck(player, 'AI');
+		}, 200);
 }
 
 //Check for one move away from a win
@@ -206,7 +210,7 @@ function hideButton(btn) {
 
 //X and O buttons at start of game
 $('#choiceX').click(() => {
-	$('#player').text('X');
+	$('#player').html('X');
 	$('.start-info').fadeOut(100, () => {
 		$('.board').show();
 		$('.info').show();
@@ -215,7 +219,7 @@ $('#choiceX').click(() => {
 });
 
 $('#choiceO').click(function() {
-	$('#player').text('O');
+	$('#player').html('O');
 	$('.start-info').fadeOut(100, () => {
 		$('.board').show();
 		$('.info').show();
@@ -249,13 +253,14 @@ $('.col-xs-4').mouseleave(function() {
 
 //User clicks on board
 $('.col-xs-4').click(function() {
-	let human = $('#player').text();
-	if (!gameOver) {
+	let human = $('#player').html();
+	if (!gameOver && !paused) {
 		//Ensure space is blank
 		if ($(this).html() === '&nbsp;') {
 			$(this).css('cursor', 'default');
 			//Mark board, disable space, and check for win
-			$(this).text(human);
+			$(this).html(human);
+			paused = true;
 			winCheck(human, 'Human');
 		}
 	}
