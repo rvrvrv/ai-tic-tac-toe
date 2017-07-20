@@ -27,12 +27,10 @@ function newGame() {
 		round = 0;
 		$('.info').hide();
 		$('.start-info').show();
-		for (var i = 0; i < 9; i++) {
-			$('#' + i).html('&nbsp;');
-			$('#' + i).css('color', 'white');
-		}
 		$('#player').empty();
 		$('#status').text('\'s turn');
+		$('.col-xs-4').html('&nbsp;');
+		$('.col-xs-4').css('color', 'white');
 	});
 }
 
@@ -45,12 +43,12 @@ function winCheck(player, who) {
 		getBoardState();
 		//Check board for one player's marks,
 		//store in playerArr
-		boardState.forEach(function (p, index) {
-			if (p === player) playerArr.push(index);
+		boardState.forEach((p, i) => {
+			if (p === player) playerArr.push(i);
 		});
 
 		//See if player's marks match a winning line
-		winningLines.forEach(function (winLine) {
+		winningLines.forEach(winLine => {
 			if (
 				playerArr.includes(winLine[0]) &&
 				playerArr.includes(winLine[1]) &&
@@ -89,9 +87,7 @@ function tieGame() {
 	showButton('new');
 	$('#player').text('');
 	$('#status').text('It\'s a tie!');
-	for (var m = 0; m < 9; m++) {
-		$('#' + m).css('color', 'sienna');
-	}
+	$('.col-xs-4').css('color', 'sienna');
 }
 
 //Switch turns
@@ -122,12 +118,12 @@ function aiTurn(player) {
 	//Check board for self (AI) & opponent marks,
 	//store in selfArr and oppArr
 	let selfArr = [];
-	boardState.forEach((s, index) => {
-		if (s === player) selfArr.push(index);
+	boardState.forEach((s, i) => {
+		if (s === player) selfArr.push(i);
 	});
 	let oppArr = [];
-	boardState.forEach((o, index) => {
-		if (o === opponent) oppArr.push(index);
+	boardState.forEach((o, i) => {
+		if (o === opponent) oppArr.push(i);
 	});
 
 	//If there's a winning move, take it
@@ -143,12 +139,11 @@ function aiTurn(player) {
 	if (round % 2 !== 0) {
 		//Determine open board positions
 		emptySpaces = [];
-		for (var e = 0; e < 9; e++) {
+		for (let e = 0; e < 9; e++) {
 			if (boardState[e] === '&nbsp;') emptySpaces.push(e);
 		}
 		//Pick random open spot
-		var randomSpot =
-			emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
+		let randomSpot = emptySpaces[Math.floor(Math.random() * emptySpaces.length)];
 		return aiMove('#' + randomSpot, player);
 	}
 }
@@ -162,7 +157,7 @@ function aiMove(spot, player) {
 //Check for one move away from a win
 function checkPotentialWin(arr, player) {
 	let move = false;
-	for (var z = 0; z < 8; z++) {
+	for (let z = 0; z < 8; z++) {
 		if (
 			arr.includes(winningLines[z][0]) &&
 			arr.includes(winningLines[z][1]) &&
@@ -192,7 +187,7 @@ function checkPotentialWin(arr, player) {
 
 //Map state of the board to an array
 function getBoardState() {
-	for (var b = 0; b < 9; b++) {
+	for (let b = 0; b < 9; b++) {
 		boardState[b] = $('#' + b).html();
 	}
 }
