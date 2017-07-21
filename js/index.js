@@ -61,10 +61,11 @@ function winCheck(player, who) {
 			}
 		});
 		//If board is full and no one won, it's a tie
-		if (round === 9 && !gameOver) tieGame();
+		if (round === 8 && !gameOver) tieGame();
 	}
 	//If no won one and there is no tie, keep playing
 	if (!gameOver) {
+		$('#player').html(`${player === 'X' ? 'O' : 'X'}`);
 		switchTurns(player, who);
 	}
 }
@@ -96,7 +97,7 @@ function tieGame() {
 function switchTurns(player, who) {
 	round++;
 	if (who === 'Human') {
-		aiTurn(`${player === 'X' ? 'O' : 'X'}`);
+		aiTurn($('#player').html());
 	}
 	else paused = false;
 }
