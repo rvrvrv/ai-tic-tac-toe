@@ -126,14 +126,18 @@ small {
 	line-height: 1.2em;
 	display: none;
 	white-space: normal;
+	outline: none !important;
 }
 
 /* Adjustments for landscape mode on small screens */
-@media only screen and (orientation: landscape) and (max-height: 768px) {
+@media only screen and (orientation: landscape) and (max-width: 768px) {
 	.title {
 		display: none;
 	}
 	.start-info {
 		margin-top: 8%;
+	}
+	.board {
+	font-size: 4.2em;
 	}
 }

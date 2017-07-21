@@ -72,7 +72,7 @@ function winCheck(player, who) {
 //Return winning results
 function winResults(player, winArr) {
 	$('#player').html(player);
-	$('#status').html(' won the game!');
+	$('#status').html(' wins!');
 
 	winArr.forEach(z => {
 		$('#' + z).css('color', 'chartreuse');
