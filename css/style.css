@@ -24,8 +24,8 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	cursor: default;
 	overflow: hidden;
-	outline: none !important;
 }
 
 h1 {
@@ -86,8 +86,8 @@ small {
 }
 
 .col-xs-4 {
-	-webkit-transition: all 1s;
-	transition: all 1s;
+	-webkit-transition: color 1s;
+	transition: color 1s;
 }
 
 .row-top,
@@ -129,15 +129,26 @@ small {
 	outline: none !important;
 }
 
-/* Adjustments for landscape mode on small screens */
-@media only screen and (orientation: landscape) and (max-width: 768px) {
+
+/* Small screens */
+@media only screen and (max-device-height: 768px) {
+	.title {
+		font-size: .8em;
+	}
+}
+
+/* Adjustments for landscape mode */
+@media only screen and (orientation: landscape) and (max-device-width: 768px) {
 	.title {
 		display: none;
 	}
 	.start-info {
-		margin-top: 8%;
+		margin-top: 5%;
 	}
 	.board {
-	font-size: 4.2em;
+		font-size: 13vh;
+	}
+	.info {
+		margin-top: -5vh;
 	}
 }
