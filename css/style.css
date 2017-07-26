@@ -15,8 +15,8 @@ div {
 }
 
 body {
-	background: #001d3d -webkit-gradient(linear, left top, left bottom, from(#001d3d), color-stop(130%, black)) fixed;
-	background: #001d3d linear-gradient(to bottom, #001d3d 0%, black 130%) fixed;
+	background: #001d3d -webkit-gradient(linear, left top, left bottom, from(#001d3d), color-stop(120%, black)) fixed;
+	background: #001d3d linear-gradient(to bottom, #001d3d 0%, black 120%) fixed;
 	color: white;
 	text-align: center;
 	font-family: 'Rancho', sans-serif;
@@ -132,6 +132,12 @@ small {
 
 /* Small screens */
 @media only screen and (max-device-height: 768px) {
+	html {
+		height: 100%;
+	}
+	body {
+		min-height: 120%;
+	}
 	.title {
 		font-size: .8em;
 	}
